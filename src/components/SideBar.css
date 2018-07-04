@@ -1,0 +1,13 @@
+
+.side-menu {
+    padding: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.menu-item {
+    padding: 20px;
+}
