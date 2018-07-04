@@ -1,0 +1,18 @@
+.main-content {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 15px;
+    min-width: 300px;
+    align-items: center;
+}
+
+.wrapper {
+    width: 300px;
+    padding: 20px;
+}
+
+.form {
+    padding: 20px;
+    min-width: 260px;
+    height: 100%;
+}
