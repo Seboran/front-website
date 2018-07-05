@@ -11,12 +11,14 @@ import SideBar from './components/SideBar';
 import Home from './Home';
 import Blog from './Blog';
 import Contact from './Contact';
+import LittleNotification from './components/LittleNotification';
 
 class App extends Component {
 	render() {
 		return (
 			<BrowserRouter>
 				<div className="App">
+					<LittleNotification />
 					<SideBar>
 						
 						<Typography><Link to='/'>Home</Link></Typography>
@@ -24,7 +26,7 @@ class App extends Component {
 						<Typography><Link to='/contact'>Contact</Link></Typography>
 						
 					</SideBar>
-					
+
 					<div className='main'>
 						<Route exact path='/' component={() => <Home />} />
 						<Route path='/blog' component={() => <Blog />} />

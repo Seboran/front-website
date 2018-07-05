@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import './FormContact.css'
 import { Button } from '@material-ui/core';
+import { openLittleNotification } from './LittleNotification';
 
 const styles = theme => ({
     textField: {
@@ -34,6 +35,10 @@ class FormContact extends Component {
         }
     }
 
+    handleSubmit = (event) => {
+        openLittleNotification('Fake send template');
+    }
+
     /**
      * @param {string} name
      * @param {Object} event
@@ -51,7 +56,7 @@ class FormContact extends Component {
         const { classes } = this.props;
 
         return (
-            <form className='container' noValidate autoComplete="off">
+            <form className='container' autoComplete="off">
                 <TextField 
                     id='email'
                     type='email'
@@ -82,6 +87,8 @@ class FormContact extends Component {
                     multiline
                 />
                 <Button
+                    type="validate"
+                    onClick={this.handleSubmit}
                     style={{marginTop: 50}}
                     variant='outlined'
                     >

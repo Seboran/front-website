@@ -17,7 +17,7 @@ class Home extends Component {
             <Typography>Il croyait son recueil maudit<br />
                 Se dépréciait, dévers glissant<br />
                 Des rêves au coeur, des voeux ardents<br />
-                Fait ton flambeau, poète hardi<br />
+                Fais ton flambeau, poète hardi<br />
             </Typography>
         </div>
         );
