@@ -36,7 +36,37 @@ class FormContact extends Component {
     }
 
     handleSubmit = (event) => {
-        openLittleNotification('Fake send template');
+        event.preventDefault();
+
+        const { email, subject, mainText} = this.state;
+
+        if (!email) return openLittleNotification('You must put your email address');
+
+        const emailRequest = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+                subject: subject,
+                message: mainText
+            })
+        };
+
+        
+
+        
+
+        fetch('/users/contact', emailRequest)
+        .then(res => {
+            if (res.status === 429) return openLittleNotification('Too many emails sent, try again later');
+            if (res.status === 500) return openLittleNotification('Issue with server, please try again later')
+            return openLittleNotification('Message sent');
+        })
+        .catch(err => openLittleNotification('An error occured, try again later'));
+
+        
     }
 
     /**
@@ -56,7 +86,9 @@ class FormContact extends Component {
         const { classes } = this.props;
 
         return (
-            <form className='container' autoComplete="off">
+            <form 
+            onSubmit={this.handleSubmit}
+            className='container' autoComplete="on">
                 <TextField 
                     id='email'
                     type='email'
