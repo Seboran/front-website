@@ -2,7 +2,6 @@ import React from 'react';
 import PageTitle from './components/PageTitle';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import './Contact.css'
 import FormContact from './components/FormContact';
 
 export default function Contact() {
