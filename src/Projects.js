@@ -9,38 +9,25 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 
 const styles = theme => ({
-    slide: {
-      padding: 15,
-      minHeight: 100,
-      color: '#fff',
-    },
-    slide1: {
-      background: '#FEA900',
-    },
-    slide2: {
-      background: '#B3DC4A',
-    },
-    slide3: {
-      background: '#6AC0FF',
-    },
+    
     root: {
         maxWidth: 600,
         width: '100%',
-      },
-      header: {
+    },
+    header: {
         display: 'flex',
         alignItems: 'center',
         height: 50,
         paddingLeft: theme.spacing.unit * 4,
         marginBottom: 20,
         backgroundColor: theme.palette.background.default,
-      },
-      img: {
+    },
+    img: {
         height: 255,
         maxWidth: 400,
         overflow: 'hidden',
         width: '100%',
-      },
+    },
 });
 
 const listProjects = [
@@ -53,11 +40,13 @@ const listProjects = [
     },
     {
         title: 'Smiling plants',
-        description: 'Project created during a startup weekend'
+        description: <Typography variant='body1'>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
+            </Typography>
     },
     {
         title: 'Fablab Marseille',
-        description: 'A third place for prototyping and innovation'
+        description: <Typography variant='body1'>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
+        </Typography>
     },
 ]
 
@@ -105,7 +94,7 @@ class Projects extends Component {
                                 listProjects.map(({title, description}, index) => 
                                 <div 
                                     className='paper'
-                                    style={{height: '500px'}} 
+                                    style={{height: '80%'}} 
                                     key={index}>
                                     <Typography variant='headline'>{title}</Typography>
                                     {description}

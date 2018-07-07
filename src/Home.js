@@ -5,7 +5,7 @@ import withSizes from 'react-sizes';
 /**
  * 
  * @param {Object} props 
- * @param {number} props.width
+ * @param {string} props.variant
  */
 class Home extends Component {
 

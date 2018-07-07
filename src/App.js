@@ -2,13 +2,13 @@
 import React, { Component } from 'react';
 // material
 
+import withSizes from 'react-sizes';
 
 import scrollToComponent from 'react-scroll-to-component';
 import './App.css';
 import { List, ListItem, ListItemText } from '@material-ui/core';
 import SideBar from './components/SideBar';
 import Home from './Home';
-import Blog from './Blog';
 import Contact from './Contact';
 import Links from './Links';
 import Projects from './Projects';
@@ -55,6 +55,9 @@ class App extends Component {
 	}
 
 	render() {
+
+		const { paddingBottom } = this.props;
+
 		return (
 			<div className="App">
 				<LittleNotification />
@@ -73,7 +76,7 @@ class App extends Component {
 					{
 						pages.map(({link, Component}, index) => 
 							<div 
-								style={{paddingBottom: '500px', height: '600px'}} 
+								style={{paddingBottom: paddingBottom}} 
 								ref={(section) => this[link] = section} 
 								key={index} >
 
@@ -93,4 +96,12 @@ class App extends Component {
 	}
 }
 
-export default App;
+/**
+ * @param {Object} param0
+ * @param {number} param0.width 
+ */
+const mapSizesToProps = ({ width }) => ({
+    paddingBottom: width > 700 ? '500px' : '200px',
+})
+
+export default withSizes(mapSizesToProps)(App);
