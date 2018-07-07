@@ -1,6 +1,9 @@
+
+
 import React, { Component } from 'react';
 import axios from 'axios';
-import isemail from 'isemail';
+import * as EmailValidator from 'email-validator';
+
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
@@ -9,6 +12,7 @@ import './FormContact.css'
 import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { openLittleNotification } from './LittleNotification';
+
 
 const styles = theme => ({
     textField: {
@@ -53,7 +57,7 @@ class FormContact extends Component {
                 return openLittleNotification('You must fill all required fields');
             }
 
-            if (!isemail.validate(email)) {
+            if (!EmailValidator.validate(email)) {
                 this.stopLoading();
                 return openLittleNotification('You must fill a valid email address');
             }
