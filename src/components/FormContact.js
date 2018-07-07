@@ -61,7 +61,7 @@ class FormContact extends Component {
         fetch('/users/contact', emailRequest)
         .then(res => {
             if (res.status === 429) return openLittleNotification('Too many emails sent, try again later');
-            if (res.status === 500) return openLittleNotification('Issue with server, please try again later')
+            if (res.status === 500 || res.status === 404) return openLittleNotification('Issue with server, please try again later');
             return openLittleNotification('Message sent');
         })
         .catch(err => openLittleNotification('An error occured, try again later'));

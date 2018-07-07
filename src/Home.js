@@ -14,10 +14,7 @@ class Home extends Component {
         return (
         <div>
             <Typography variant={variant} >nirina.fr</Typography>
-            <Typography>Il croyait son recueil maudit<br />
-                Se dépréciait, dévers glissant<br />
-                Des rêves au coeur, des voeux ardents<br />
-                Fais ton flambeau, poète hardi<br />
+            <Typography>
             </Typography>
         </div>
         );
