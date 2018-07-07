@@ -26,8 +26,9 @@ function ListItemNav({menuName, onClick}) {
 const pages = [
 	{link: '/', menuName:'Home', Component: (key) => <Home key={key}/>},
 	{link: '/projects', menuName:'Projects', Component: (key) => <Projects key={key}/>},
-	{link: '/links', menuName: 'Links', Component: (key) => <Links key={key}/>},
-	{link: '/contact', menuName: 'Contact', Component: (key) => <Contact key={key} />}
+	
+	{link: '/contact', menuName: 'Contact', Component: (key) => <Contact key={key} />},
+	{link: '/links', menuName: 'Links', Component: (key) => <Links key={key}/>}
 ]
 
 class App extends Component {

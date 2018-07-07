@@ -26,6 +26,7 @@
   margin-right: 15px;
   min-width: 300px;
   align-items: center;
+  justify-content: center;
 }
 
 .wrapper {
