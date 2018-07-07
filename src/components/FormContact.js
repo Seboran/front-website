@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import isemail from 'isemail';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
@@ -47,7 +48,16 @@ class FormContact extends Component {
 
             const { email, subject, mainText } = this.state;
 
-            if (!email) return openLittleNotification('You must put your email address');
+            if (!email || !subject || !mainText) {
+                this.stopLoading();
+                return openLittleNotification('You must fill all required fields');
+            }
+
+            if (!isemail.validate(email)) {
+                this.stopLoading();
+                return openLittleNotification('You must fill a valid email address');
+            }
+
             
             axios.post('https://nirina-back.herokuapp.com/users/contact', {
                 email: email,
@@ -55,14 +65,16 @@ class FormContact extends Component {
                 message: mainText
             })
             .then(res => {
-                this.setState({sending: false});
+                this.stopLoading();
+
                 if (res.status === 429) return openLittleNotification('Too many emails sent, try again later');
                 if (res.status === 500 || res.status === 404) return openLittleNotification('Issue with server, please try again later');
                 this.setState(initialState);
+
                 return openLittleNotification('Message sent');
             })
             .catch(() => {
-                this.setState({sending: false});
+                this.stopLoading();
                 openLittleNotification('An error occured, try again later');
             });
 
@@ -80,6 +92,13 @@ class FormContact extends Component {
         this.setState({
             [name]: event.target.value
         });
+    }
+
+    /**
+     * Stops the linear loading bar
+     */
+    stopLoading = () => {
+        this.setState({ sending: false });
     }
 
     render() {
