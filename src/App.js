@@ -26,7 +26,6 @@ function ListItemNav({menuName, onClick}) {
 const pages = [
 	{link: '/', menuName:'Home', Component: (key) => <Home key={key}/>},
 	{link: '/projects', menuName:'Projects', Component: (key) => <Projects key={key}/>},
-	{link: '/blog', menuName:'Blog', Component: (key) => <Blog key={key} />},
 	{link: '/links', menuName: 'Links', Component: (key) => <Links key={key}/>},
 	{link: '/contact', menuName: 'Contact', Component: (key) => <Contact key={key} />}
 ]
@@ -72,7 +71,14 @@ class App extends Component {
 				<div className='main'>
 					{
 						pages.map(({link, Component}, index) => 
-							<div style={{paddingBottom: '500px', height: '600px'}} ref={(section) => this[link] = section} key={index}>{Component(index)}</div>
+							<div 
+								style={{paddingBottom: '500px', height: '600px'}} 
+								ref={(section) => this[link] = section} 
+								key={index} >
+
+								{Component(index)}
+
+							</div>
 						)
 					}
 					
