@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // material
 
 
-
+import scrollToComponent from 'react-scroll-to-component';
 import './App.css';
 import { List, ListItem, ListItemText } from '@material-ui/core';
 import SideBar from './components/SideBar';
@@ -44,6 +44,13 @@ class App extends Component {
 	onClick = link => () => {
 		this.setState({
 			currentPage: link
+		}, () => {
+			
+			scrollToComponent(this[link], {offset: -100, align: 'top'});
+			
+
+
+
 		});
 	}
 
@@ -65,7 +72,7 @@ class App extends Component {
 				<div className='main'>
 					{
 						pages.map(({link, Component}, index) => 
-							this.state.currentPage === link && Component(index)
+							<div style={{paddingBottom: '500px', height: '600px'}} ref={(section) => this[link] = section} key={index}>{Component(index)}</div>
 						)
 					}
 					
