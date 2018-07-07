@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
@@ -43,10 +44,12 @@ class FormContact extends Component {
         if (!email) return openLittleNotification('You must put your email address');
 
         const emailRequest = {
-            method: 'POST',
+            "method": "POST",
             headers: {
-                'Content-Type': 'application/json',
+                "content-type": "application/json",
             },
+            mode: 'no-cors',
+
             body: JSON.stringify({
                 email: email,
                 subject: subject,
@@ -55,10 +58,11 @@ class FormContact extends Component {
         };
 
         
-
-        
-
-        fetch('/users/contact', emailRequest)
+        axios.post('https://nirina-back.herokuapp.com/users/contact', {
+            email: email,
+            subject: subject,
+            message: mainText
+        })
         .then(res => {
             if (res.status === 429) return openLittleNotification('Too many emails sent, try again later');
             if (res.status === 500 || res.status === 404) return openLittleNotification('Issue with server, please try again later');

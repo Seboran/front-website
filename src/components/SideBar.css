@@ -1,13 +1,9 @@
 
 .side-menu {
-    padding: 15px;
+    padding-Top: 30px;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
 
 .menu-item {
-    padding: 20px;
+    margin: 20px;
 }

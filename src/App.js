@@ -1,47 +1,80 @@
 // pkg
 import React, { Component } from 'react';
-import { Link, BrowserRouter, Route } from 'react-router-dom';
 // material
 
 
 
 import './App.css';
-import { Typography } from '@material-ui/core';
+import { List, ListItem, ListItemText } from '@material-ui/core';
 import SideBar from './components/SideBar';
 import Home from './Home';
 import Blog from './Blog';
 import Contact from './Contact';
+import Links from './Links';
 import Projects from './Projects';
 import LittleNotification from './components/LittleNotification';
 
+function ListItemNav({menuName, onClick}) {
+
+	return (
+		<ListItem button onClick={onClick}>
+			<ListItemText>{menuName}</ListItemText>
+		</ListItem>
+	);
+};
+
+const pages = [
+	{link: '/', menuName:'Home', Component: (key) => <Home key={key}/>},
+	{link: '/projects', menuName:'Projects', Component: (key) => <Projects key={key}/>},
+	{link: '/blog', menuName:'Blog', Component: (key) => <Blog key={key} />},
+	{link: '/links', menuName: 'Links', Component: (key) => <Links key={key}/>},
+	{link: '/contact', menuName: 'Contact', Component: (key) => <Contact key={key} />}
+]
+
 class App extends Component {
+
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			currentPage: '/'
+		}
+	}
+
+	onClick = link => () => {
+		this.setState({
+			currentPage: link
+		});
+	}
+
 	render() {
 		return (
-			<BrowserRouter>
-				<div className="App">
-					<LittleNotification />
-					<SideBar>
+			<div className="App">
+				<LittleNotification />
+				<SideBar>
+					<List>
+						{pages.map(({link, menuName}, index) => 
+							<ListItemNav onClick={this.onClick(link)} link={link} menuName={menuName} key={index} />
+						)}
 						
-						<Typography><Link to='/'>Home</Link></Typography>
-						<Typography><Link to='/projects'>Projects</Link></Typography>
-						<Typography><Link to='/blog'>Blog</Link></Typography>
-						<Typography><Link to='/contact'>Contact</Link></Typography>
-						
-						
-					</SideBar>
+					</List>
+					
+					
+				</SideBar>
 
-					<div className='main'>
-						<Route exact path='/' component={() => <Home />} />
-						<Route path='/projects' component={() => <Projects />} />
-						<Route path='/blog' component={() => <Blog />} />
-						<Route path='/contact' component={() => <Contact />} />
+				<div className='main'>
+					{
+						pages.map(({link, Component}, index) => 
+							this.state.currentPage === link && Component(index)
+						)
+					}
+					
 
-					</div>
-						
-						
-				
 				</div>
-			</BrowserRouter>
+					
+					
+			
+			</div>
 		);
 	}
 }
