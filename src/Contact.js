@@ -14,7 +14,7 @@ export default function Contact() {
             <img style={{width: '100%'}} src='/images/moi.png' alt="myself" />
             </div>
             
-            <Paper className='form' >
+            <Paper className='paper' >
                 <Typography>For any inquiries please contact me through this form</Typography>
                 <FormContact />
             </Paper>

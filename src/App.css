@@ -13,3 +13,9 @@
   width: 70%;
   margin-bottom: 45px;
 }
+
+.paper {
+  padding: 20px;
+  min-width: 260px;
+  height: 100%;
+}

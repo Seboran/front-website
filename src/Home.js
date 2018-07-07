@@ -14,8 +14,11 @@ class Home extends Component {
         return (
         <div>
             <Typography variant={variant} >nirina.fr</Typography>
-            <Typography>
-            </Typography>
+            <div className='paper' >
+                <Typography>I am a French student Engineer from the École Centrale de Marseille, interested in new technologies and entrepreneurship.<br /><br />
+                    This website is a vitrine of my projects and a personnal place for me and my thoughts.
+                </Typography>
+            </div>
         </div>
         );
     }   

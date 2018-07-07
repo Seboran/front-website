@@ -5,7 +5,8 @@ import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 
 import './FormContact.css'
-import { Button } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import { openLittleNotification } from './LittleNotification';
 
 const styles = theme => ({
@@ -25,52 +26,48 @@ const styles = theme => ({
     },
 });
 
+const initialState = {
+    email: '',
+    subject: '',
+    mainText: '',
+    sending: false,
+};
 class FormContact extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            email: '',
-            subject: '',
-            mainText: '',
-        }
+        this.state = initialState
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
+        this.setState({
+            sending: true
+        }, () => {
 
-        const { email, subject, mainText} = this.state;
+            const { email, subject, mainText } = this.state;
 
-        if (!email) return openLittleNotification('You must put your email address');
-
-        const emailRequest = {
-            "method": "POST",
-            headers: {
-                "content-type": "application/json",
-            },
-            mode: 'no-cors',
-
-            body: JSON.stringify({
+            if (!email) return openLittleNotification('You must put your email address');
+            
+            axios.post('https://nirina-back.herokuapp.com/users/contact', {
                 email: email,
                 subject: subject,
                 message: mainText
             })
-        };
+            .then(res => {
+                this.setState({sending: false});
+                if (res.status === 429) return openLittleNotification('Too many emails sent, try again later');
+                if (res.status === 500 || res.status === 404) return openLittleNotification('Issue with server, please try again later');
+                this.setState(initialState);
+                return openLittleNotification('Message sent');
+            })
+            .catch(() => {
+                this.setState({sending: false});
+                openLittleNotification('An error occured, try again later');
+            });
 
-        
-        axios.post('https://nirina-back.herokuapp.com/users/contact', {
-            email: email,
-            subject: subject,
-            message: mainText
         })
-        .then(res => {
-            if (res.status === 429) return openLittleNotification('Too many emails sent, try again later');
-            if (res.status === 500 || res.status === 404) return openLittleNotification('Issue with server, please try again later');
-            return openLittleNotification('Message sent');
-        })
-        .catch(err => openLittleNotification('An error occured, try again later'));
 
-        
     }
 
     /**
@@ -130,6 +127,7 @@ class FormContact extends Component {
                     >
                     Send
                 </Button>
+                {this.state.sending && <LinearProgress />}
             </form>
         );
     }
