@@ -101,7 +101,7 @@ class App extends Component {
  * @param {number} param0.width 
  */
 const mapSizesToProps = ({ width }) => ({
-    paddingBottom: width > 700 ? '500px' : '200px',
+    paddingBottom: width > 700 ? '800px' : '200px',
 })
 
 export default withSizes(mapSizesToProps)(App);
